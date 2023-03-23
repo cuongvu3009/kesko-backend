@@ -7,7 +7,6 @@ class Config {
   public DATABASE_URL: string;
   public SECRET_KEY_ONE: string | undefined;
   public SECRET_KEY_TWO: string | undefined;
-  public NODE_ENV: string | undefined;
   public CLIENT_URL: string | undefined;
   public SERVER_PORT: string | undefined;
   public REDIS_HOST: string | undefined;
@@ -23,7 +22,6 @@ class Config {
     this.DATABASE_URL = process.env.DATABASE_URl || this.DEFAULT_DATABASE_URL;
     this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE || '';
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
-    this.NODE_ENV = process.env.NODE_ENV || this.DEFAULT_NODE_ENV;
     this.CLIENT_URL = process.env.CLIENT_URL || this.DEFAULT_CLIENT_URL;
     this.SERVER_PORT = process.env.SERVER_PORT || '';
     this.REDIS_HOST = process.env.REDIS_HOST || '';
