@@ -9,15 +9,10 @@ import HTTP_STATUS from 'http-status-codes';
 import compression from 'compression';
 import 'express-async-errors';
 
-//	logger
-import Logger from 'bunyan';
-
 //	routes
 import applicationRoutes from './routes';
 
 import { IErrorResponse, CustomError } from './shared/error-handler';
-
-const log: Logger = config.createLogger('server');
 
 export class NodeServer {
   private app: Application;
@@ -63,7 +58,7 @@ export class NodeServer {
     });
 
     app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
-      log.error(error);
+      console.log(error);
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json(error.serializeErrors());
       }
@@ -76,15 +71,15 @@ export class NodeServer {
       const httpServer: http.Server = new http.Server(app);
       this.startHttpServer(httpServer);
     } catch (error) {
-      log.error(error);
+      console.log(error);
     }
   }
 
   private startHttpServer(httpServer: http.Server): void {
-    log.info(`Worker with process id of ${process.pid} has started...`);
-    log.info(`Server has started with process ${process.pid}`);
+    console.log(`Worker with process id of ${process.pid} has started...`);
+    console.log(`Server has started with process ${process.pid}`);
     httpServer.listen(config.SERVER_PORT, () => {
-      log.info(`Server running on port ${config.SERVER_PORT}`);
+      console.log(`Server running on port ${config.SERVER_PORT}`);
     });
   }
 }
